@@ -38,7 +38,7 @@ var vite_config_default = defineConfig({
   root: path.resolve(__dirname, "client"),
   // root olarak client klasörünü ayarla
   build: {
-    outDir: path.resolve(__dirname, "dist"),
+    outDir: path.resolve(__dirname, "build"),
     // Build çıktısı 'dist' klasörüne
     emptyOutDir: true,
     rollupOptions: {
