@@ -27,8 +27,7 @@ var __filename = fileURLToPath(import.meta.url);
 var __dirname = dirname(__filename);
 var vite_config_default = defineConfig({
   plugins: [react()],
-  base: "My_portfolio",
-  // GitHub Pages URL'ine uygun: https://rk1coder.github.io/My_portfolio/
+  base: "/My_portfolio/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
@@ -36,11 +35,14 @@ var vite_config_default = defineConfig({
     }
   },
   root: path.resolve(__dirname, "client"),
-  // client klasöründeki index.html kullanılacak
   build: {
     outDir: path.resolve(__dirname, "dist"),
-    // build dosyalarını direkt "dist" klasörüne koyuyoruz
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      // Express, sunucu tarafı modülüdür. Eğer ortak kodlar yüzünden istemci bundle'ına dahil ediliyorsa,
+      // bunu dışlamak için aşağıdaki ayarı ekleyebilirsin.
+      external: ["express"]
+    }
   }
 });
 

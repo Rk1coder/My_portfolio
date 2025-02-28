@@ -8,16 +8,21 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
-  base: "My_portfolio", // GitHub Pages URL'ine uygun: https://rk1coder.github.io/My_portfolio/
+  base: '/My_portfolio/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
       "@shared": path.resolve(__dirname, "shared"),
     },
   },
-  root: path.resolve(__dirname, "client"), // client klasöründeki index.html kullanılacak
+  root: path.resolve(__dirname, "client"),
   build: {
-    outDir: path.resolve(__dirname, "dist"), // build dosyalarını direkt "dist" klasörüne koyuyoruz
+    outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      // Express, sunucu tarafı modülüdür. Eğer ortak kodlar yüzünden istemci bundle'ına dahil ediliyorsa,
+      // bunu dışlamak için aşağıdaki ayarı ekleyebilirsin.
+      external: ['express']
+    }
   },
 });
