@@ -28,7 +28,7 @@ var __dirname = dirname(__filename);
 var vite_config_default = defineConfig({
   plugins: [react()],
   base: "/My_portfolio/",
-  // GitHub Pages repo adı
+  // GitHub Pages alt dizin adı
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
@@ -36,14 +36,14 @@ var vite_config_default = defineConfig({
     }
   },
   root: path.resolve(__dirname, "client"),
-  // Root dizin 'client'
+  // root olarak client klasörünü ayarla
   build: {
     outDir: path.resolve(__dirname, "dist"),
     // Build çıktısı 'dist' klasörüne
     emptyOutDir: true,
     rollupOptions: {
       external: ["express"]
-      // Sunucu tarafı modülleri dışla
+      // Sunucu tarafı modüllerini dışla
     }
   }
 });
