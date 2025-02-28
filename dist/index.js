@@ -27,7 +27,7 @@ var __filename = fileURLToPath(import.meta.url);
 var __dirname = dirname(__filename);
 var vite_config_default = defineConfig({
   plugins: [react()],
-  base: "/My_portfolio/",
+  base: "My_portfolio",
   // GitHub Pages URL'ine uygun: https://rk1coder.github.io/My_portfolio/
   resolve: {
     alias: {

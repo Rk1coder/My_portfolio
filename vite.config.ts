@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
-  base: "/My_portfolio/", // GitHub Pages URL'ine uygun: https://rk1coder.github.io/My_portfolio/
+  base: "My_portfolio", // GitHub Pages URL'ine uygun: https://rk1coder.github.io/My_portfolio/
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
