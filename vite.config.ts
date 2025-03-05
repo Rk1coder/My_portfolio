@@ -9,7 +9,6 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
-  base: '/My_portfolio/',  // GitHub Pages alt dizin adı
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'client', 'src'),
