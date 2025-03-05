@@ -46,7 +46,7 @@ export function Contact() {
         >
           <h2 className="text-3xl font-bold mb-8 text-center text-white">Get In Touch</h2>
           
-          <Card className="p-6 bg-black/90 border border-primary/30 shadow-lg shadow-primary/20">
+          <Card className="p-6 bg-black/90 border border-primary/30 shadow-lg shadow-primary/20 mx-auto max-w-md w-full">
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <Input 
