@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 
 const skills = {
-  frontend: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Material UI", "Redux"],
-  backend: ["Node.js", "Express", "PostgreSQL", "MongoDB", "RESTful APIs", "GraphQL"],
-  tools: ["Git", "Docker", "AWS", "CI/CD", "Jest", "Agile/Scrum"],
+  frontend: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Material UI", "Redux","Flutter"],
+  backend: ["C++", "Python", "Dart", "C#", "Django", ,"C","RESTful APIs", "Node.js"],
+  tools: ["Git", "Docker", "AWS", "CI/CD", "Linux", "Agile/Scrum"],
   defense: ["Embedded Systems", "Signal Processing", "Real-time Systems", "System Integration", "Cyber Security"]
 };
 
