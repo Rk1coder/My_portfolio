@@ -1,13 +1,20 @@
-import { createRoot } from "react-dom/client";
-import { StrictMode } from "react";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./index.css";
+import { ThemeProvider } from "@/providers/theme-provider";
+import "./styles/theme.css";
+import "./styles/index.css";
 
-const root = document.getElementById("root");
-if (!root) throw new Error("Root element not found");
+const rootElement = document.getElementById("root");
 
-createRoot(root).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+if (!rootElement) {
+  console.error('Could not find root element with id "root"');
+} else {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
+        <App />
+      </ThemeProvider>
+    </React.StrictMode>
+  );
+}

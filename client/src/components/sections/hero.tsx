@@ -68,7 +68,7 @@ export function Hero() {
         ))}
         
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/5 via-background/70 to-background" />
       </div>
       <div className="container mx-auto px-4 py-20">
         <motion.div
@@ -132,9 +132,9 @@ export function Hero() {
                   behavior: "smooth",
                 });
               }}
-              className="group"
+              className="group bg-primary/10 text-primary-foreground hover:bg-primary/20 dark:bg-white/90 dark:text-background dark:hover:bg-white transition-all duration-300"
             >
-              Learn More
+              İNCELE
               <motion.span
                 className="inline-block ml-2"
                 animate={{ y: [0, 3, 0] }}

@@ -91,7 +91,7 @@ export function About() {
               <img 
                 src="WhatsApp Görsel 2024-09-20 saat 11.35.23_6a0fc72f.jpg" 
                 alt="Profile" 
-                className="rounded-lg shadow-xl w-full max-w-md mx-auto object-contain bg-black/5"
+                className="rounded-lg shadow-xl w-full max-w-md mx-auto object-contain bg-background/90 border border-primary/10"
               />
             </motion.div>
             <motion.div variants={itemVariants}>

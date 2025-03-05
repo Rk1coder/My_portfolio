@@ -73,7 +73,29 @@ const cardVariants = {
 export function Projects() {
   return (
     <section id="projects" className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      <div className="absolute inset-0 bg-background/95" />
+      <div className="absolute inset-0 opacity-10">
+        {Array.from({ length: 15 }).map((_, i) => (
+          <motion.div
+            key={`star-${i}`}
+            className="absolute h-1 w-1 rounded-full bg-primary/40"
+            initial={{ 
+              x: Math.random() * 100 + "%",
+              y: Math.random() * 100 + "%",
+              opacity: 0.2
+            }}
+            animate={{ 
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{
+              duration: Math.random() * 4 + 2,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * 3
+            }}
+          />
+        ))}
+      </div>
       <div className="container mx-auto px-4 relative">
         <motion.div
           initial="hidden"

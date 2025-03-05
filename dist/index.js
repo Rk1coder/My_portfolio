@@ -27,8 +27,7 @@ var __filename = fileURLToPath(import.meta.url);
 var __dirname = dirname(__filename);
 var vite_config_default = defineConfig({
   plugins: [react()],
-  base: "/My_portfolio/",
-  // GitHub Pages alt dizin adı
+  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
@@ -38,7 +37,7 @@ var vite_config_default = defineConfig({
   root: path.resolve(__dirname, "client"),
   // root olarak client klasörünü ayarla
   build: {
-    outDir: path.resolve(__dirname, "build"),
+    outDir: path.resolve(__dirname, "dist"),
     // Build çıktısı 'dist' klasörüne
     emptyOutDir: true,
     rollupOptions: {

@@ -23,7 +23,7 @@ export function ProjectCard({ title, description, technologies, githubUrl, liveU
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
     >
-      <Card className="h-full overflow-hidden backdrop-blur-sm bg-card/80 border-primary/20">
+      <Card className="h-full overflow-hidden backdrop-blur-sm bg-card/40 border-primary/15 shadow-lg shadow-primary/5">
         {image && (
           <div className="w-full h-48 overflow-hidden">
             <img src={image} alt={title} className="w-full h-full object-cover" />

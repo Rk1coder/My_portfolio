@@ -34,12 +34,12 @@ export function Navigation() {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/">
-            <a className="text-xl font-bold text-primary">RK</a>
+          <Link href="/" className="text-xl font-bold text-primary">
+            RK
           </Link>
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
@@ -54,7 +54,7 @@ export function Navigation() {
                 }}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
           <ThemeToggle />

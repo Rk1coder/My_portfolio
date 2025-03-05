@@ -9,6 +9,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'client', 'src'),
@@ -17,7 +18,7 @@ export default defineConfig({
   },
   root: path.resolve(__dirname, 'client'),  // root olarak client klasörünü ayarla
   build: {
-    outDir: path.resolve(__dirname, 'build'),  // Build çıktısı 'dist' klasörüne
+    outDir: path.resolve(__dirname, 'dist'),  // Build çıktısı 'dist' klasörüne
     emptyOutDir: true,
     rollupOptions: {
       external: ['express'],  // Sunucu tarafı modüllerini dışla
