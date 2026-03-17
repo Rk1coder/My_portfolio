@@ -10,20 +10,20 @@ const socials = [
   {
     icon: SiGithub,
     label: "GitHub",
-    href: "https://github.com/username",
-    username: "@username",
+    href: "https://github.com/Rk1coder",
+    username: "@Rk1coder",
   },
   {
     icon: SiLinkedin,
     label: "LinkedIn",
-    href: "https://linkedin.com/in/username",
+    href: "https://linkedin.com/in/rabia-kiratli",
     username: "Rabia Kıratlı",
   },
   {
     icon: Mail,
     label: "E-posta",
-    href: "mailto:rabia@example.com",
-    username: "rabia@example.com",
+    href: "mailto:kiratli.rabiaa@gmail.com",
+    username: "kiratli.rabiaa@gmail.com",
   },
 ];
 
@@ -55,7 +55,7 @@ export function Contact() {
         >
           {/* Heading */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <p className="text-sm font-mono text-violet-400 mb-3 tracking-widest uppercase">
+            <p className="text-sm font-mono text-violet-500 dark:text-violet-400 mb-3 tracking-widest uppercase">
               — İletişim
             </p>
             <h2 className="text-4xl md:text-5xl font-black text-foreground">
@@ -77,10 +77,10 @@ export function Contact() {
                   target={href.startsWith("mailto") ? "_self" : "_blank"}
                   rel="noopener noreferrer"
                   whileHover={{ x: 6 }}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm hover:border-violet-500/40 hover:bg-violet-500/5 transition-all duration-300 group"
+                  className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-violet-500/50 hover:bg-violet-500/5 transition-all duration-300 group"
                 >
                   <div className="p-2.5 rounded-lg bg-violet-500/10 border border-violet-500/20 group-hover:bg-violet-500/20 transition-colors">
-                    <Icon className="h-5 w-5 text-violet-400" />
+                    <Icon className="h-5 w-5 text-violet-500" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-foreground">{label}</p>
@@ -95,7 +95,7 @@ export function Contact() {
               {submitted ? (
                 <div className="flex flex-col items-center justify-center h-full gap-4 py-12 text-center">
                   <div className="p-4 rounded-full bg-violet-500/15 border border-violet-500/30">
-                    <Send className="h-8 w-8 text-violet-400" />
+                    <Send className="h-8 w-8 text-violet-500" />
                   </div>
                   <h3 className="text-xl font-bold text-foreground">Mesajınız iletildi!</h3>
                   <p className="text-muted-foreground text-sm">En kısa sürede geri dönüş yapacağım.</p>
@@ -103,7 +103,7 @@ export function Contact() {
                     variant="outline"
                     size="sm"
                     onClick={() => setSubmitted(false)}
-                    className="border-violet-500/30 text-violet-400 hover:bg-violet-500/10"
+                    className="border-violet-500/30 text-violet-500 hover:bg-violet-500/10"
                   >
                     Yeni Mesaj
                   </Button>
@@ -120,9 +120,9 @@ export function Contact() {
                     <div className="space-y-1.5">
                       <label className="text-xs font-medium text-muted-foreground">Ad Soyad</label>
                       <Input
-                        placeholder="Rabia Kıratlı"
+                        placeholder="Ad Soyad"
                         required
-                        className="bg-card/50 border-border/60 focus:border-violet-500/50 focus:ring-violet-500/20 transition-colors"
+                        className="bg-background border-border focus:border-violet-500/60 transition-colors"
                       />
                     </div>
                     <div className="space-y-1.5">
@@ -131,7 +131,7 @@ export function Contact() {
                         type="email"
                         placeholder="ornek@mail.com"
                         required
-                        className="bg-card/50 border-border/60 focus:border-violet-500/50 focus:ring-violet-500/20 transition-colors"
+                        className="bg-background border-border focus:border-violet-500/60 transition-colors"
                       />
                     </div>
                   </div>
@@ -139,7 +139,7 @@ export function Contact() {
                     <label className="text-xs font-medium text-muted-foreground">Konu</label>
                     <Input
                       placeholder="İş birliği / Proje fikri / Soru"
-                      className="bg-card/50 border-border/60 focus:border-violet-500/50 transition-colors"
+                      className="bg-background border-border focus:border-violet-500/60 transition-colors"
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -148,12 +148,12 @@ export function Contact() {
                       placeholder="Mesajınızı buraya yazın..."
                       rows={5}
                       required
-                      className="bg-card/50 border-border/60 focus:border-violet-500/50 transition-colors resize-none"
+                      className="bg-background border-border focus:border-violet-500/60 transition-colors resize-none"
                     />
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-violet-600 hover:bg-violet-500 text-white font-semibold shadow-lg shadow-violet-900/30 transition-all"
+                    className="w-full bg-violet-600 hover:bg-violet-500 text-white font-semibold shadow-lg shadow-violet-900/20 transition-all"
                   >
                     <Send className="h-4 w-4 mr-2" />
                     Gönder
@@ -170,11 +170,11 @@ export function Contact() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="container mx-auto px-4 mt-20 pt-8 border-t border-border/40"
+        className="container mx-auto px-4 mt-20 pt-8 border-t border-border"
       >
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p className="font-mono">
-            <span className="text-violet-400">RK</span> · Rabia Kıratlı
+            <span className="text-violet-500">RK</span> · Rabia Kıratlı
           </p>
           <p>© {new Date().getFullYear()} · Tüm hakları saklıdır.</p>
         </div>
