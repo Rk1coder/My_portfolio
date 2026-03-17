@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { Analytics } from "@vercel/analytics/react";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
 
@@ -16,6 +17,7 @@ export default function App() {
           <Route component={NotFound} />
         </Switch>
         <Toaster />
+        <Analytics />
       </QueryClientProvider>
     </ThemeProvider>
   );
