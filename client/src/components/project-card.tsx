@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, ChevronDown, Shield, FlaskConical, Brain } from "lucide-react";
@@ -53,71 +52,81 @@ export function ProjectCard({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }} className="h-full">
-      <Card
-        className={`h-full overflow-hidden backdrop-blur-sm border shadow-lg transition-shadow duration-300 flex flex-col ${
+    <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="h-full">
+      <div
+        className={`h-full flex flex-col rounded-xl border overflow-hidden backdrop-blur-sm transition-all duration-300 ${
           featured
-            ? "bg-card/60 border-primary/40 shadow-primary/20 hover:shadow-primary/30"
-            : "bg-card/40 border-primary/15 shadow-primary/5"
+            ? "bg-card/60 border-violet-500/35 shadow-xl shadow-violet-900/20 hover:border-violet-500/55 hover:shadow-violet-900/30"
+            : "bg-card/50 border-border/60 shadow-md hover:border-violet-500/30 hover:shadow-lg"
         }`}
       >
+        {/* Featured header bar */}
         {featured && (
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent" />
-            <div className="relative flex items-center justify-between px-4 py-2 border-b border-primary/20">
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-xs font-semibold text-primary uppercase tracking-widest">
-                  {featuredLabel || "Featured Project"}
-                </span>
-              </div>
-              {period && (
-                <span className="text-xs text-muted-foreground">{period}</span>
-              )}
+          <div className="relative bg-gradient-to-r from-violet-600/20 via-violet-500/10 to-transparent border-b border-violet-500/25 px-5 py-2.5 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
+              <span className="text-xs font-semibold text-violet-300 tracking-widest uppercase">
+                {featuredLabel || "Featured Project"}
+              </span>
             </div>
+            {period && (
+              <span className="text-xs text-violet-400/70 font-mono">{period}</span>
+            )}
           </div>
         )}
 
+        {/* Image */}
         {image && (
-          <div className="w-full h-48 overflow-hidden">
-            <img src={image} alt={title} className="w-full h-full object-cover" />
+          <div className="w-full h-44 overflow-hidden">
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
           </div>
         )}
 
-        <CardHeader className="cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
-          <div className="flex items-start justify-between gap-2">
-            <div className="space-y-1 flex-1">
-              <CardTitle className="text-xl leading-snug text-primary">{title}</CardTitle>
+        {/* Header */}
+        <div
+          className="cursor-pointer px-5 pt-5 pb-3"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex-1 space-y-1">
+              <h3 className={`font-bold leading-snug ${featured ? "text-lg text-violet-300" : "text-base text-foreground"}`}>
+                {title}
+              </h3>
               {institution && (
-                <p className="text-xs text-muted-foreground font-medium">{institution}</p>
+                <p className="text-xs text-violet-400/70 font-medium">{institution}</p>
               )}
             </div>
             <motion.div
               animate={{ rotate: isExpanded ? 180 : 0 }}
               transition={{ duration: 0.2 }}
-              className="shrink-0 mt-1"
+              className="shrink-0 mt-0.5"
             >
-              <ChevronDown className="h-5 w-5 text-primary" />
+              <ChevronDown className="h-4 w-4 text-violet-400/70" />
             </motion.div>
           </div>
-          <CardDescription className="text-foreground/70 text-sm leading-relaxed">
-            {description}
-          </CardDescription>
-        </CardHeader>
+          <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{description}</p>
+        </div>
 
+        {/* Expandable content */}
         <motion.div
           animate={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
+          transition={{ duration: 0.32, ease: "easeInOut" }}
           className="overflow-hidden"
         >
-          <CardContent className="pt-0 pb-4 space-y-4">
+          <div className="px-5 pb-4 space-y-4">
             {details && (
-              <p className="text-foreground/80 text-sm leading-relaxed">{details}</p>
+              <p className="text-sm text-foreground/70 leading-relaxed border-t border-border/40 pt-4">
+                {details}
+              </p>
             )}
 
             {modules && modules.length > 0 && (
               <div className="space-y-2">
-                <h4 className="text-xs font-semibold text-primary uppercase tracking-widest">
+                <h4 className="text-xs font-semibold text-violet-400 uppercase tracking-widest">
                   Temel Modüller
                 </h4>
                 <div className="space-y-2">
@@ -126,12 +135,12 @@ export function ProjectCard({
                     return (
                       <div
                         key={i}
-                        className="flex items-start gap-3 p-2 rounded-lg bg-primary/5 border border-primary/10"
+                        className="flex items-start gap-3 p-3 rounded-lg bg-violet-500/6 border border-violet-500/15"
                       >
-                        <Icon className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <Icon className="h-3.5 w-3.5 text-violet-400 mt-0.5 shrink-0" />
                         <div>
-                          <span className="text-sm font-semibold text-foreground/90">{mod.name}: </span>
-                          <span className="text-sm text-foreground/70">{mod.description}</span>
+                          <span className="text-xs font-bold text-foreground/90">{mod.name}: </span>
+                          <span className="text-xs text-foreground/65">{mod.description}</span>
                         </div>
                       </div>
                     );
@@ -142,13 +151,13 @@ export function ProjectCard({
 
             {innovations && innovations.length > 0 && (
               <div className="space-y-2">
-                <h4 className="text-xs font-semibold text-primary uppercase tracking-widest">
+                <h4 className="text-xs font-semibold text-violet-400 uppercase tracking-widest">
                   Yenilikçi Yaklaşımlar
                 </h4>
-                <ul className="space-y-1">
+                <ul className="space-y-1.5">
                   {innovations.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-foreground/75">
-                      <span className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                    <li key={i} className="flex items-start gap-2 text-xs text-foreground/65">
+                      <span className="h-1 w-1 rounded-full bg-violet-400 mt-1.5 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -157,38 +166,35 @@ export function ProjectCard({
             )}
 
             {note && (
-              <div className="text-xs text-muted-foreground border border-primary/10 rounded-lg p-3 bg-primary/5 italic">
+              <div className="text-xs text-muted-foreground border border-violet-500/15 rounded-lg p-3 bg-violet-500/5 italic">
                 {note}
               </div>
             )}
-          </CardContent>
+          </div>
         </motion.div>
 
-        <CardContent className="mt-auto">
-          <div className="flex flex-wrap gap-2 mb-4">
+        {/* Footer */}
+        <div className="mt-auto px-5 pb-5 pt-2">
+          <div className="flex flex-wrap gap-1.5 mb-4">
             {technologies.map((tech) => (
               <Badge
                 key={tech}
                 variant="secondary"
-                className={`text-xs ${
-                  featured
-                    ? "bg-primary/15 text-primary border border-primary/20"
-                    : "bg-primary/10 text-primary"
-                }`}
+                className="text-xs bg-violet-500/8 text-violet-300 border border-violet-500/20 hover:bg-violet-500/15 transition-colors"
               >
                 {tech}
               </Badge>
             ))}
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <Button
               variant="outline"
               size="sm"
               asChild
-              className="border-primary/20 hover:border-primary"
+              className="border-border/60 text-muted-foreground hover:border-violet-500/50 hover:text-violet-300 transition-all text-xs"
             >
               <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-4 w-4" />
+                <Github className="mr-1.5 h-3.5 w-3.5" />
                 GitHub
               </a>
             </Button>
@@ -197,17 +203,17 @@ export function ProjectCard({
                 variant="outline"
                 size="sm"
                 asChild
-                className="border-primary/20 hover:border-primary"
+                className="border-border/60 text-muted-foreground hover:border-violet-500/50 hover:text-violet-300 transition-all text-xs"
               >
                 <a href={liveUrl} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  Live Demo
+                  <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
+                  Demo
                 </a>
               </Button>
             )}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </motion.div>
   );
 }

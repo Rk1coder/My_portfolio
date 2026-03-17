@@ -117,7 +117,15 @@ const projects = [
     description: "Doğal Dil İşleme (NLP) ve metin analizi projeleri",
     details:
       "Duygu analizi, metin sınıflandırma ve chatbot projeleri geliştirdim. Transformer tabanlı modellerle dil işleme çözümleri ürettim.",
-    technologies: ["NLP", "Transformers", "spaCy", "Hugging Face", "BERT", "GPT", "Text Classification"],
+    technologies: [
+      "NLP",
+      "Transformers",
+      "spaCy",
+      "Hugging Face",
+      "BERT",
+      "GPT",
+      "Text Classification",
+    ],
     githubUrl: "https://github.com/kendi-github-linkin/nlp-projects",
     liveUrl: "https://nlp-ai.seninwebsiten.dev",
   },
@@ -127,7 +135,15 @@ const projects = [
     description: "Modern web uygulamaları ve UI/UX geliştirme",
     details:
       "React, Next.js ve Tailwind CSS ile kullanıcı dostu, performanslı ve ölçeklenebilir web uygulamaları geliştirdim.",
-    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Framer Motion", "API Integration", "UI/UX"],
+    technologies: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "Framer Motion",
+      "API Integration",
+      "UI/UX",
+    ],
     githubUrl: "https://github.com/kendi-github-linkin/frontend-projects",
     liveUrl: "https://frontend.seninwebsiten.dev",
   },
@@ -135,96 +151,51 @@ const projects = [
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
+const itemVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
 };
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-background/95" />
-      <div className="absolute inset-0 opacity-10">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <motion.div
-            key={`star-${i}`}
-            className="absolute h-1 w-1 rounded-full bg-primary/40"
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: 0.2,
-            }}
-            animate={{ opacity: [0.2, 0.5, 0.2] }}
-            transition={{
-              duration: Math.random() * 4 + 2,
-              repeat: Infinity,
-              ease: "linear",
-              delay: Math.random() * 3,
-            }}
-          />
-        ))}
-      </div>
+    <section id="projects" className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-background/98" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_0%_100%,rgba(124,58,237,0.08),transparent)]" />
 
-      <div className="container mx-auto px-4 relative">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={containerVariants}
+          className="max-w-6xl mx-auto"
         >
-          <motion.h2
-            className="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
-            variants={cardVariants}
-          >
-            <span className="flex items-center justify-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              Projeler
-            </span>
-          </motion.h2>
-          <motion.p
-            className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto"
-            variants={cardVariants}
-          >
-            Yapay zeka, gömülü sistemler ve savunma teknolojileri alanlarındaki çalışmalarım
-          </motion.p>
+          {/* Heading */}
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <p className="text-sm font-mono text-violet-400 mb-3 tracking-widest uppercase">
+              — Projeler
+            </p>
+            <h2 className="text-4xl md:text-5xl font-black text-foreground">
+              Çalışmalarım &{" "}
+              <span className="text-violet-500">Projelerim</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-sm">
+              Yapay zeka, gömülü sistemler ve savunma teknolojileri alanlarındaki öne çıkan çalışmalarım
+            </p>
+          </motion.div>
 
           {/* Featured Project — full width */}
-          <motion.div variants={cardVariants} className="mb-8">
+          <motion.div variants={itemVariants} className="mb-10">
             <ProjectCard {...featuredProject} />
           </motion.div>
 
           {/* Other Projects grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                variants={cardVariants}
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
+              <motion.div key={index} variants={itemVariants}>
                 <ProjectCard {...project} />
               </motion.div>
             ))}
