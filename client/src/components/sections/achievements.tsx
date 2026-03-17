@@ -76,7 +76,7 @@ export function Achievements() {
   return (
     <section id="achievements" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-background/98" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_100%_0%,rgba(124,58,237,0.08),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_100%_0%,rgba(124,58,237,0.08),transparent)] bg-[#000000]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
