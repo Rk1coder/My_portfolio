@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
@@ -86,15 +85,12 @@ export function Navigation() {
               ))}
             </div>
 
-            <div className="flex items-center gap-2">
-              <ThemeToggle />
-              <button
-                onClick={() => setMobileOpen((o) => !o)}
-                className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </button>
-            </div>
+            <button
+              onClick={() => setMobileOpen((o) => !o)}
+              className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
       </motion.nav>

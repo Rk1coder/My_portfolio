@@ -43,117 +43,172 @@ const stats = [
   { icon: Cpu, label: "Yayın", value: "5" },
 ];
 
-/* ── 3D Orbital Sphere ── */
-function OrbitalSphere() {
-  const orbits = [
-    { rx: 110, ry: 34, rotDeg: 0, color: "rgba(139,92,246,0.7)", dur: 6 },
-    { rx: 110, ry: 34, rotDeg: 60, color: "rgba(167,139,250,0.5)", dur: 9 },
-    { rx: 110, ry: 34, rotDeg: 120, color: "rgba(109,40,217,0.6)", dur: 7.5 },
-  ];
+/* ── Canvas-based Neural Network Particle Animation ── */
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  opacity: number;
+  pulsePhase: number;
+}
+
+function NeuralCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animRef = useRef<number>(0);
+  const particlesRef = useRef<Particle[]>([]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const W = canvas.offsetWidth;
+    const H = canvas.offsetHeight;
+    canvas.width = W;
+    canvas.height = H;
+
+    const COUNT = 55;
+    const MAX_DIST = 110;
+
+    /* Init particles */
+    particlesRef.current = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      radius: Math.random() * 2 + 1.2,
+      opacity: Math.random() * 0.5 + 0.3,
+      pulsePhase: Math.random() * Math.PI * 2,
+    }));
+
+    let t = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      t += 0.012;
+
+      const particles = particlesRef.current;
+
+      /* Move */
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+      }
+
+      /* Draw edges */
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MAX_DIST) {
+            const alpha = (1 - dist / MAX_DIST) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      /* Draw nodes */
+      for (const p of particles) {
+        const pulse = Math.sin(t * 2 + p.pulsePhase) * 0.3 + 0.7;
+        const r = p.radius * pulse;
+
+        /* Glow */
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4);
+        grad.addColorStop(0, `rgba(167, 139, 250, ${p.opacity * pulse})`);
+        grad.addColorStop(1, "rgba(139, 92, 246, 0)");
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r * 4, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        /* Core dot */
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(196, 181, 253, ${p.opacity * pulse})`;
+        ctx.fill();
+      }
+
+      /* Central hub — glowing sphere in centre */
+      const cx = W * 0.5;
+      const cy = H * 0.5;
+      const hubR = 14 + Math.sin(t * 1.5) * 2;
+
+      const hubGrad = ctx.createRadialGradient(cx - hubR * 0.3, cy - hubR * 0.3, 0, cx, cy, hubR * 3);
+      hubGrad.addColorStop(0, "rgba(196, 181, 253, 0.4)");
+      hubGrad.addColorStop(0.5, "rgba(124, 58, 237, 0.2)");
+      hubGrad.addColorStop(1, "rgba(124, 58, 237, 0)");
+      ctx.beginPath();
+      ctx.arc(cx, cy, hubR * 3, 0, Math.PI * 2);
+      ctx.fillStyle = hubGrad;
+      ctx.fill();
+
+      const coreGrad = ctx.createRadialGradient(cx - hubR * 0.35, cy - hubR * 0.35, 0, cx, cy, hubR);
+      coreGrad.addColorStop(0, "#e9d5ff");
+      coreGrad.addColorStop(0.6, "#7c3aed");
+      coreGrad.addColorStop(1, "#4c1d95");
+      ctx.beginPath();
+      ctx.arc(cx, cy, hubR, 0, Math.PI * 2);
+      ctx.fillStyle = coreGrad;
+      ctx.shadowColor = "rgba(139, 92, 246, 0.8)";
+      ctx.shadowBlur = 18;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      /* Rotating orbital rings */
+      for (let ring = 0; ring < 3; ring++) {
+        const angle = t * (0.4 + ring * 0.15) + (ring * Math.PI * 2) / 3;
+        const orbitR = 55 + ring * 30;
+        const dotX = cx + Math.cos(angle) * orbitR;
+        const dotY = cy + Math.sin(angle) * orbitR * 0.38;
+
+        /* Ring ellipse */
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, orbitR, orbitR * 0.38, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(139, 92, 246, ${0.15 - ring * 0.03})`;
+        ctx.lineWidth = 0.7;
+        ctx.setLineDash([3, 7]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        /* Orbiting dot */
+        const dGrad = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, 5);
+        dGrad.addColorStop(0, "rgba(196,181,253,0.9)");
+        dGrad.addColorStop(1, "rgba(124,58,237,0)");
+        ctx.beginPath();
+        ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = dGrad;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(dotX, dotY, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(221, 214, 254, 0.95)";
+        ctx.fill();
+      }
+
+      animRef.current = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => cancelAnimationFrame(animRef.current);
+  }, []);
 
   return (
-    <div className="relative flex items-center justify-center w-64 h-64 md:w-80 md:h-80 select-none">
-      {/* Glow behind */}
-      <motion.div
-        className="absolute w-40 h-40 rounded-full bg-violet-500/20 blur-3xl"
-        animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.7, 0.4] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      <svg
-        viewBox="0 0 240 240"
-        className="w-full h-full"
-        style={{ overflow: "visible" }}
-      >
-        {/* Outer dashed circle (equator) */}
-        <circle
-          cx="120" cy="120" r="110"
-          fill="none"
-          stroke="rgba(139,92,246,0.12)"
-          strokeWidth="1"
-        />
-
-        {/* Orbiting rings at different tilt angles */}
-        {orbits.map((orb, i) => (
-          <g key={i} transform={`rotate(${orb.rotDeg} 120 120)`}>
-            {/* Ring ellipse */}
-            <ellipse
-              cx="120" cy="120"
-              rx={orb.rx} ry={orb.ry}
-              fill="none"
-              stroke={orb.color}
-              strokeWidth="1"
-              strokeDasharray="3 6"
-            />
-            {/* Orbiting dot — use animated g translate instead of cx/cy */}
-            <motion.g
-              animate={{
-                x: [orb.rx, 0, -orb.rx, 0, orb.rx],
-                y: [0, orb.ry, 0, -orb.ry, 0],
-              }}
-              transition={{ duration: orb.dur, repeat: Infinity, ease: "linear" }}
-            >
-              <circle
-                cx="120" cy="120"
-                r="4"
-                fill={orb.color}
-                style={{ filter: "drop-shadow(0 0 4px rgba(139,92,246,0.8))" }}
-              />
-            </motion.g>
-          </g>
-        ))}
-
-        {/* Node dots on sphere surface */}
-        {[
-          [120, 10], [230, 120], [120, 230], [10, 120],
-          [195, 45], [195, 195], [45, 195], [45, 45],
-        ].map(([cx, cy], i) => (
-          <motion.circle
-            key={`node-${i}`}
-            cx={cx} cy={cy} r="2.5"
-            fill="rgba(139,92,246,0.6)"
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2 + i * 0.3, repeat: Infinity, delay: i * 0.2 }}
-          />
-        ))}
-
-        {/* Connecting lines */}
-        {[
-          [120, 10, 195, 45], [195, 45, 230, 120], [230, 120, 195, 195],
-          [195, 195, 120, 230], [120, 230, 45, 195], [45, 195, 10, 120],
-          [10, 120, 45, 45], [45, 45, 120, 10],
-          [120, 10, 230, 120], [230, 120, 120, 230], [120, 230, 10, 120],
-        ].map(([x1, y1, x2, y2], i) => (
-          <motion.line
-            key={`line-${i}`}
-            x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke="rgba(139,92,246,0.2)"
-            strokeWidth="1"
-            animate={{ opacity: [0.1, 0.4, 0.1] }}
-            transition={{ duration: 3 + i * 0.2, repeat: Infinity, delay: i * 0.1 }}
-          />
-        ))}
-
-        {/* Center sphere */}
-        <motion.g
-          style={{ transformOrigin: "120px 120px" }}
-          animate={{ scale: [0.9, 1.1, 0.9] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <circle
-            cx="120" cy="120" r="16"
-            fill="url(#centerGrad)"
-            style={{ filter: "drop-shadow(0 0 12px rgba(139,92,246,0.9))" }}
-          />
-        </motion.g>
-        <defs>
-          <radialGradient id="centerGrad" cx="40%" cy="35%">
-            <stop offset="0%" stopColor="#c4b5fd" />
-            <stop offset="100%" stopColor="#7c3aed" />
-          </radialGradient>
-        </defs>
-      </svg>
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="w-full h-full"
+      style={{ display: "block" }}
+    />
   );
 }
 
@@ -163,8 +218,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
-      style={{ backgroundColor: "var(--hero-bg, #06060f)" }}
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-[#06060f]"
     >
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -180,7 +234,7 @@ export function Hero() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 py-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 py-20">
           {/* Left: text content */}
           <div className="flex-1 text-center lg:text-left max-w-2xl">
             {/* Badge */}
@@ -201,7 +255,7 @@ export function Hero() {
               transition={{ duration: 0.65, delay: 0.1 }}
               className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6 leading-none"
             >
-              <span className="text-white dark:text-white text-gray-900">Rabia </span>
+              <span className="text-white">Rabia </span>
               <span className="bg-gradient-to-r from-violet-400 via-primary to-violet-600 bg-clip-text text-transparent">
                 Kıratlı
               </span>
@@ -214,7 +268,7 @@ export function Hero() {
               transition={{ delay: 0.35, duration: 0.5 }}
               className="h-9 mb-10"
             >
-              <p className="text-lg md:text-xl font-mono text-slate-400 dark:text-slate-400">
+              <p className="text-lg md:text-xl font-mono text-slate-400">
                 <span className="text-violet-400 select-none">&gt;&nbsp;</span>
                 <span>{role}</span>
                 <span className="text-violet-400 animate-pulse select-none">_</span>
@@ -234,8 +288,8 @@ export function Hero() {
                     <Icon className="h-4 w-4 text-violet-400" />
                   </div>
                   <div className="text-left">
-                    <p className="text-2xl font-bold text-foreground leading-none">{value}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{label}</p>
+                    <p className="text-2xl font-bold text-white leading-none">{value}</p>
+                    <p className="text-xs text-slate-400 mt-0.5">{label}</p>
                   </div>
                 </div>
               ))}
@@ -263,7 +317,7 @@ export function Hero() {
                 onClick={() =>
                   document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="border-border hover:border-violet-500/50 hover:bg-violet-500/5 transition-all"
+                className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition-all"
               >
                 Hakkımda
                 <motion.span
@@ -277,19 +331,19 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: 3D animation */}
+          {/* Right: Canvas animation */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-            className="flex-shrink-0 hidden sm:flex items-center justify-center"
+            transition={{ delay: 0.4, duration: 0.9, ease: "easeOut" }}
+            className="hidden sm:block flex-shrink-0 w-72 h-72 md:w-96 md:h-96"
           >
-            <OrbitalSphere />
+            <NeuralCanvas />
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll line */}
+      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none">
         <motion.div
           className="w-px h-14 bg-gradient-to-b from-violet-500/60 to-transparent mx-auto"

@@ -9,7 +9,7 @@ import NotFound from "@/pages/not-found";
 
 export default function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
+    <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <Switch>
           <Route path="/" component={Home} />

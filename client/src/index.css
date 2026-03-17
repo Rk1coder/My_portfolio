@@ -4,18 +4,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --hero-bg: #06060f;
-    --hero-grid: rgba(150, 100, 255, 0.5);
-    --orb-color: rgba(124, 58, 237, 0.12);
-  }
-
-  .light {
-    --hero-bg: #f4f3ff;
-    --hero-grid: rgba(124, 58, 237, 0.15);
-    --orb-color: rgba(124, 58, 237, 0.08);
-  }
-
   * {
     @apply border-border;
   }
