@@ -181,7 +181,7 @@ export function ProjectCard({
               variant="outline"
               size="sm"
               asChild
-              className="border-border hover:border-violet-500/50 hover:text-violet-500 transition-all text-xs"
+              className="border-border hover:border-violet-500/50 hover:text-violet-500 transition-all text-xs text-[#ffffff]"
             >
               <a href={githubUrl} target="_blank" rel="noopener noreferrer">
                 <Github className="mr-1.5 h-3.5 w-3.5" />
@@ -193,7 +193,7 @@ export function ProjectCard({
                 variant="outline"
                 size="sm"
                 asChild
-                className="border-border hover:border-violet-500/50 hover:text-violet-500 transition-all text-xs"
+                className="border-border hover:border-violet-500/50 hover:text-violet-500 transition-all text-xs text-[#ffffff]"
               >
                 <a href={liveUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
