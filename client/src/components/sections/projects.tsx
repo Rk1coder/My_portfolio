@@ -55,6 +55,7 @@ const allProjects = [
   },
   {
     title: "İnovasyon Çalışmalarım",
+    image: "innovation.png",
     description: "Sağlık teknolojileri ve Doğal Afet Odaklı yapay zeka tabanlı sistemler",
     details:
       "Hastalık teşhisi için derin öğrenme modelleri, tıbbi görüntü analizi ve afet durumlarında hızlı müdahale sağlayan otonom sistemler üzerine çalışmalar yaptım. AI destekli teşhis sistemleri ve veri analitiği projeleri geliştirdim.",
@@ -72,6 +73,7 @@ const allProjects = [
   },
   {
     title: "Göktürk Ekibi Çalışmalarım",
+    image: "pars.jpg",
     description: "Savunma sanayii ve otonom İHA sistemleri",
     details:
       "Göktürk ekibi ile hava savunma sistemlerinden kaçınma algoritmaları, QR kod tabanlı hassas iniş sistemi ve otonom hedef tespit sistemleri geliştirdim. Jetson Orin Nano üzerinde çalışan, gerçek zamanlı nesne tespiti ve hedef takibi gerçekleştiren algoritmalar yazdım.",
@@ -90,6 +92,7 @@ const allProjects = [
   },
   {
     title: "AI Tabanlı Robotik Çalışmalarım",
+    image: "robots.png",
     description: "Otonom robotik sistemler ve görüntü işleme çözümleri",
     details:
       "Otonom navigasyon, SLAM tabanlı haritalama ve robotik görüntü işleme üzerine çalışmalar yaptım. Endüstriyel otomasyon ve arama-kurtarma görevleri için robotik sistemler geliştirdim. ROS tabanlı simülasyonlarla test edilen projelerde nesne tanıma, engelden kaçınma ve yol planlama algoritmaları kullandım.",
@@ -108,6 +111,7 @@ const allProjects = [
   },
   {
     title: "NLP Çalışmalarım",
+    image: "nlp.jpg",
     description: "Doğal Dil İşleme (NLP) ve metin analizi projeleri",
     details:
       "Duygu analizi, metin sınıflandırma ve chatbot projeleri geliştirdim. Transformer tabanlı modellerle dil işleme çözümleri ürettim.",
@@ -117,6 +121,7 @@ const allProjects = [
   },
   {
     title: "Frontend Geliştirme Çalışmalarım",
+    image: "sdd.png",
     description: "Modern web uygulamaları ve UI/UX geliştirme",
     details:
       "React, Next.js ve Tailwind CSS ile kullanıcı dostu, performanslı ve ölçeklenebilir web uygulamaları geliştirdim.",
