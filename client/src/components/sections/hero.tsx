@@ -245,7 +245,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-sm font-medium mb-8"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
-              Mühendis & Araştırmacı · Necmettin Erbakan Üniversitesi
+              Mühendis & Araştırmacı · Engineer & Researcher
             </motion.div>
 
             {/* Name */}
