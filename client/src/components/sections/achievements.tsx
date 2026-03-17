@@ -18,6 +18,25 @@ const awards = [
 
 const publications = [
   {
+    venue: "Springer · JRTIP",
+    title:
+      "Real-time multi-object detection and tracking in UAV systems: improved YOLOv11-EFAC and optimized tracking algorithms",
+    journal: "Journal of Real-Time Image Processing",
+    year: "2025",
+    doiUrl: "https://link.springer.com/article/10.1007/s11554-025-01758-z",
+    doi: "10.1007/s11554-025-01758-z",
+  },
+  {
+    venue: "ASREL 2025",
+    title:
+      "İnsansız Hava Araçları Destekli Derin Öğrenme İle Afet Yönetiminde Gelişmiş Gerçek Zamanlı Nesne Ve Hasar Tespiti",
+    journal: "Aerospace Research Letters · 29 Ara 2025",
+    year: "2025",
+    doiUrl:
+      "https://www.researchgate.net/publication/399139982_Insansiz_Hava_Araclari_Destekli_Derin_Ogrenme_Ile_Afet_Yonetiminde_Gelismis_Gercek_Zamanli_Nesne_ve_Hasar_Tespiti",
+    doi: "ResearchGate",
+  },
+  {
     venue: "IEEE IDAP 2024",
     title:
       "Monitoring Post-Earthquake Search and Rescue Operations through UAVs Vision: Teams, Equipment and Structural Damage Detection",

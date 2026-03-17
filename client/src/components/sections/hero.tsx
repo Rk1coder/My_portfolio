@@ -42,7 +42,7 @@ function useTypewriter(words: string[], speed = 65, pause = 2200) {
 const stats = [
   { icon: Brain, label: "AI Projesi", value: "10+" },
   { icon: Plane, label: "İHA Sistemi", value: "3+" },
-  { icon: Cpu, label: "Yayın", value: "3" },
+  { icon: Cpu, label: "Yayın", value: "5" },
 ];
 
 export function Hero() {
