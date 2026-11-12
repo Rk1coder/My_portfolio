@@ -1,0 +1,3 @@
+# npm run build also writes the Node/Express server bundle into dist.
+# Cloudflare serves only the portfolio's static frontend assets.
+/index.js
