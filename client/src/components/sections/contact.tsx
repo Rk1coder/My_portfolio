@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import StarBorder from "@/components/ui/star-border";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -42,7 +43,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-background" />
+      <div className="absolute inset-0 bg-[#06060f]/75" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_100%,rgba(124,58,237,0.10),transparent)]" />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -118,17 +119,21 @@ export function Contact() {
                 >
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-muted-foreground">Ad Soyad</label>
+                      <label htmlFor="contact-name" className="text-xs font-medium text-muted-foreground">Ad Soyad</label>
                       <Input
+                        id="contact-name"
+                        autoComplete="name"
                         placeholder="Ad Soyad"
                         required
                         className="bg-background border-border focus:border-violet-500/60 transition-colors"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-muted-foreground">E-posta</label>
+                      <label htmlFor="contact-email" className="text-xs font-medium text-muted-foreground">E-posta</label>
                       <Input
                         type="email"
+                        id="contact-email"
+                        autoComplete="email"
                         placeholder="ornek@mail.com"
                         required
                         className="bg-background border-border focus:border-violet-500/60 transition-colors"
@@ -136,28 +141,41 @@ export function Contact() {
                     </div>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-muted-foreground">Konu</label>
+                    <label htmlFor="contact-subject" className="text-xs font-medium text-muted-foreground">Konu</label>
                     <Input
+                      id="contact-subject"
                       placeholder="İş birliği / Proje fikri / Soru"
                       className="bg-background border-border focus:border-violet-500/60 transition-colors"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-muted-foreground">Mesaj</label>
+                    <label htmlFor="contact-message" className="text-xs font-medium text-muted-foreground">Mesaj</label>
                     <Textarea
+                      id="contact-message"
                       placeholder="Mesajınızı buraya yazın..."
                       rows={5}
                       required
                       className="bg-background border-border focus:border-violet-500/60 transition-colors resize-none"
                     />
                   </div>
-                  <Button
+                  <StarBorder
+                    as="button"
                     type="submit"
-                    className="w-full bg-violet-600 hover:bg-violet-500 text-white font-semibold shadow-lg shadow-violet-900/20 transition-all"
+                    color="#ddd6fe"
+                    trailColor="#8b5cf6"
+                    backgroundColor="#6d28d9"
+                    borderColor="#a78bfa"
+                    textColor="#ffffff"
+                    duration={5}
+                    radius={10}
+                    thickness={1.5}
+                    glow={0.6}
+                    hover="brighten"
+                    className="w-full font-semibold transition-colors hover:brightness-110"
                   >
-                    <Send className="h-4 w-4 mr-2" />
+                    <Send className="h-4 w-4" />
                     Gönder
-                  </Button>
+                  </StarBorder>
                 </form>
               )}
             </motion.div>

@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import SpotlightCard from "@/components/ui/spotlight-card";
+import AnimatedContent from "@/components/animations/AnimatedContent";
 import { Trophy, BookOpen, ExternalLink } from "lucide-react";
 
 const awards = [
@@ -75,8 +77,8 @@ const itemVariants = {
 export function Achievements() {
   return (
     <section id="achievements" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-background/98" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_100%_0%,rgba(124,58,237,0.08),transparent)] bg-[#000000]" />
+      <div className="absolute inset-0 bg-[#06060f]/80" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_100%_0%,rgba(124,58,237,0.08),transparent)]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -107,10 +109,12 @@ export function Achievements() {
               </div>
               <div className="space-y-4">
                 {awards.map((award, i) => (
-                  <motion.div
+                  <SpotlightCard
                     key={i}
-                    variants={itemVariants}
-                    whileHover={{ x: 4 }}
+                    spotlightColor="#fbbf24"
+                    intensity={0.1}
+                    borderGlow={0.45}
+                    proximity={40}
                     className="p-5 rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm hover:border-amber-500/30 transition-all duration-300 group"
                   >
                     <div className="flex items-start justify-between gap-3 mb-2">
@@ -123,7 +127,7 @@ export function Achievements() {
                     </div>
                     <p className="text-xs text-violet-400 font-medium mb-1">{award.organization}</p>
                     <p className="text-sm text-muted-foreground">{award.description}</p>
-                  </motion.div>
+                  </SpotlightCard>
                 ))}
               </div>
             </motion.div>
@@ -138,10 +142,12 @@ export function Achievements() {
               </div>
               <div className="space-y-4">
                 {publications.map((pub, i) => (
-                  <motion.div
+                  <AnimatedContent
                     key={i}
-                    variants={itemVariants}
-                    whileHover={{ x: 4 }}
+                    distance={20}
+                    duration={0.5}
+                    blur={2}
+                    delay={i * 0.04}
                     className="p-5 rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm hover:border-violet-500/30 transition-all duration-300 group"
                   >
                     <div className="flex items-start justify-between gap-3 mb-2">
@@ -167,7 +173,7 @@ export function Achievements() {
                     ) : (
                       <p className="text-xs text-muted-foreground font-mono">DOI: {pub.doi}</p>
                     )}
-                  </motion.div>
+                  </AnimatedContent>
                 ))}
               </div>
             </motion.div>

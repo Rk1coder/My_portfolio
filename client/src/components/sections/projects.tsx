@@ -142,12 +142,9 @@ const itemVariants = {
 };
 
 export function Projects() {
-  const featuredProject = allProjects[0];
-  const gridProjects = allProjects.slice(1);
-
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-background" />
+      <div className="absolute inset-0 bg-[#06060f]/75" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_0%_100%,rgba(124,58,237,0.07),transparent)]" />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -172,16 +169,10 @@ export function Projects() {
             </p>
           </motion.div>
 
-          {/* NefesAI — full width */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <ProjectCard {...featuredProject} />
-          </motion.div>
-
-          {/* Other projects — same card design, 3-column grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {gridProjects.map((project, index) => (
-              <motion.div key={index} variants={itemVariants}>
-                <ProjectCard {...project} />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            {allProjects.map((project, index) => (
+              <motion.div key={project.title} variants={itemVariants} className="min-w-0">
+                <ProjectCard {...project} index={index + 1} />
               </motion.div>
             ))}
           </div>

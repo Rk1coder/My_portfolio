@@ -1,4 +1,10 @@
 import { motion } from "framer-motion";
+import ProfileCard from "@/components/ui/profile-card";
+import SpotlightCard from "@/components/ui/spotlight-card";
+import ScrollReveal from "@/components/text-animations/ScrollReveal";
+import CountUp from "@/components/text-animations/CountUp";
+import AnimatedContent from "@/components/animations/AnimatedContent";
+import { usePrefersReducedMotion } from "@/hooks/use-reduced-motion";
 import { Badge } from "@/components/ui/badge";
 import { Code2, Cpu, Shield, Wrench, Trophy, BookOpen, Plane } from "lucide-react";
 
@@ -50,9 +56,10 @@ const itemVariants = {
 };
 
 export function About() {
+  const reducedMotion = usePrefersReducedMotion();
   return (
     <section id="about" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-background" />
+      <div className="absolute inset-0 bg-[#06060f]/75" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_0%_50%,rgba(124,58,237,0.07),transparent)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_100%_30%,rgba(124,58,237,0.04),transparent)]" />
 
@@ -78,23 +85,26 @@ export function About() {
           <div className="grid lg:grid-cols-5 gap-10 items-start mb-14">
             {/* Photo — 2 cols */}
             <motion.div variants={itemVariants} className="lg:col-span-2">
-              <div className="relative group">
-                {/* Decorative frame */}
-                <div className="absolute -inset-3 rounded-2xl bg-gradient-to-br from-violet-500/25 via-primary/15 to-transparent blur-xl group-hover:blur-2xl transition-all duration-500" />
-                <div className="absolute -top-2 -right-2 w-24 h-24 rounded-full bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
-                  <span className="text-xs font-mono text-violet-400 text-center leading-tight px-2">AI<br/>Researcher</span>
-                </div>
-                <img
-                  src="WhatsApp Görsel 2024-09-20 saat 11.35.23_6a0fc72f.jpg"
-                  alt="Rabia Kıratlı"
-                  className="relative rounded-2xl w-full object-cover border border-violet-500/20 shadow-2xl shadow-violet-900/20"
-                />
-                {/* Name badge overlay */}
-                <div className="absolute -bottom-4 left-4 right-4 bg-card border border-border rounded-xl p-3 shadow-xl">
-                  <p className="font-bold text-foreground text-sm">Rabia Kıratlı</p>
-                  <p className="text-xs text-violet-500">Necmettin Erbakan Üniversitesi</p>
-                </div>
-              </div>
+              <ProfileCard
+                avatarUrl="/WhatsApp Görsel 2024-09-20 saat 11.35.23_6a0fc72f.jpg"
+                name="Rabia Kıratlı"
+                title="Yazılım Geliştirici & Araştırmacı"
+                handle="Rk1coder"
+                status="AI Researcher"
+                statusColor="#a78bfa"
+                contactText="İletişim"
+                onContactClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth" })}
+                theme="dark"
+                backdropColor="#24143e"
+                holo={0.35}
+                glare={0.18}
+                tiltStrength={7}
+                parallax={8}
+                enableMobileTilt={false}
+                intro={false}
+                className="mx-auto"
+              />
+              <p className="mt-4 text-center text-xs text-violet-300">Necmettin Erbakan Üniversitesi</p>
 
               {/* Stats below photo */}
               <div className="mt-10 grid grid-cols-3 gap-3">
@@ -104,7 +114,7 @@ export function About() {
                     className="flex flex-col items-center text-center p-3 rounded-xl border border-border bg-card hover:border-violet-500/40 transition-colors"
                   >
                     <Icon className="h-4 w-4 text-violet-500 mb-1" />
-                    <p className="text-xl font-black text-foreground">{value}</p>
+                    <p className="text-xl font-black text-foreground"><CountUp to={parseInt(value, 10)} suffix={value.endsWith("+") ? "+" : ""} duration={1.1} /></p>
                     <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">{sub}</p>
                   </div>
                 ))}
@@ -120,15 +130,15 @@ export function About() {
                   Hakkımda
                 </h3>
                 <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-                  <p>
+                  <ScrollReveal mode="enter" baseRotation={0} baseOpacity={0.35} blurStrength={2} duration={0.5} stagger={0.006}>
                     Yapay zeka destekli sistemler, gerçek zamanlı İHA teknolojileri ve savunma sanayi uygulamaları konusunda uzmanlaşmış bir yazılım geliştirici ve araştırmacıyım.
-                  </p>
-                  <p>
+                  </ScrollReveal>
+                  <ScrollReveal mode="enter" baseRotation={0} baseOpacity={0.35} blurStrength={2} duration={0.5} stagger={0.006}>
                     Hem yazılım geliştirme hem de gömülü sistemler konusundaki güçlü altyapım, projelerime özgün bir bakış açısı katıyor. Yapay zeka, gerçek zamanlı işleme ve İHA teknolojilerine odaklanarak; ticari ve savunma sektörlerine yönelik güvenli, verimli ve yenilikçi çözümler üretiyorum.
-                  </p>
-                  <p>
+                  </ScrollReveal>
+                  <ScrollReveal mode="enter" baseRotation={0} baseOpacity={0.35} blurStrength={2} duration={0.5} stagger={0.006}>
                     TEKNOFEST bünyesinde ödüllü projelere imza atmış, Springer ve IEEE'de yayın yapmış, TEKNOFEST Onkolojide 3T kapsamında NefesAI projesiyle akciğer kanseri tedavisinde yapay zeka uygulamaları geliştiriyorum.
-                  </p>
+                  </ScrollReveal>
                 </div>
               </div>
 
@@ -138,11 +148,10 @@ export function About() {
                   <span className="h-1 w-6 rounded bg-violet-500 inline-block" />
                   Öne Çıkan Kilometre Taşları
                 </h3>
-                <div className="space-y-4">
+                <AnimatedContent distance={16} duration={0.5} stagger={0.08} className="space-y-4">
                   {milestones.map((m, i) => (
-                    <motion.div
+                    <div
                       key={i}
-                      variants={itemVariants}
                       className="flex gap-4 items-start group"
                     >
                       <div className="flex flex-col items-center">
@@ -159,9 +168,9 @@ export function About() {
                       <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors pb-2">
                         {m.text}
                       </p>
-                    </motion.div>
+                    </div>
                   ))}
-                </div>
+                </AnimatedContent>
               </div>
             </motion.div>
           </div>
@@ -174,9 +183,12 @@ export function About() {
             </h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {skillGroups.map(({ icon: Icon, label, skills }) => (
-                <motion.div
+                <SpotlightCard
                   key={label}
-                  variants={itemVariants}
+                  spotlightColor="#8b5cf6"
+                  intensity={0.14}
+                  borderGlow={0.55}
+                  proximity={40}
                   className="p-5 rounded-xl border border-border bg-card hover:border-violet-500/40 transition-colors duration-300 group"
                 >
                   <div className="flex items-center gap-3 mb-4">
@@ -196,7 +208,7 @@ export function About() {
                       </Badge>
                     ))}
                   </div>
-                </motion.div>
+                </SpotlightCard>
               ))}
             </div>
           </motion.div>
