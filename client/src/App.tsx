@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/providers/theme-provider";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route component={NotFound} />
         </Switch>
         <Toaster />
+        <Analytics />
       </QueryClientProvider>
     </ThemeProvider>
   );
